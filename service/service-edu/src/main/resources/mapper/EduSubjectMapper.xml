@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pty.eduservice.mapper.EduSubjectMapper">
+    <resultMap id="subject" type="com.pty.eduservice.entity.subject.OneSubject">
+        <id column="aid" property="id"/>
+        <result column="atitle" property="title"/>
+
+        <collection property="children" ofType="com.pty.eduservice.entity.subject.TwoSubject">
+            <id column="bid" property="id"/>
+            <result column="btitle" property="title"/>
+        </collection>
+    </resultMap>
+
+    <!--需要取个别名，上面的resultmap的column也是对应的别名-->
+    <select id="getAllsubject" resultMap="subject">
+        SELECT
+            a.id aid,a.title atitle,
+            b.id bid,b.title btitle
+        FROM
+            edu_subject a,
+            edu_subject b
+        WHERE
+            b.parent_id = a.id;
+    </select>
+
+    <!--<select id="getAllsubject" resultType="com.pty.eduservice.entity.subject.OneSubject">
+        select id,title from edu_subject where parent_id =0;
+    </select>-->
+
+</mapper>

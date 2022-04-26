@@ -1,0 +1,28 @@
+#服务端口号
+server:
+  port: 8002
+
+ #环境配置
+spring:
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      #上传的文件大小
+      max-file-size: 10MB
+      #整个请求的大小
+      max-request-size: 15MB
+
+
+#阿里云oss配置
+aliyun:
+  oss:
+    file:
+      #地域节点
+      endpoint: oss-cn-beijing.aliyuncs.com
+      #AccessKeyID
+      keyid: LTAI5tMPmnRuSjU3wmEC13TH
+      #AccessKey Secret
+      keysecret: 60w1Stbt3qSUw6ABilXLeCvSWuFw10
+      #bucket名称
+      bucketname: guliedu-10001
