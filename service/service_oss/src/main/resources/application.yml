@@ -12,6 +12,12 @@ spring:
       max-file-size: 10MB
       #整个请求的大小
       max-request-size: 15MB
+  application:
+    name: service-oss
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
 
 
 #阿里云oss配置

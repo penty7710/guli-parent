@@ -3,15 +3,24 @@ package com.pty.vod.service.impl;
 import com.aliyun.vod.upload.impl.UploadVideoImpl;
 import com.aliyun.vod.upload.req.UploadStreamRequest;
 import com.aliyun.vod.upload.resp.UploadStreamResponse;
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
+import com.pty.servicebase.handler.GuliException;
 import com.pty.vod.service.VodService;
+import com.pty.vod.utils.InitVodClient;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * Created by 彭天怡 2022/4/26.
  */
+@Slf4j
 @Service
 public class VodServiceImpl implements VodService {
 
@@ -46,6 +55,47 @@ public class VodServiceImpl implements VodService {
         }catch (Exception e){
             e.printStackTrace();
             return null;
+        }
+    }
+
+    //删除单个视频
+    @Override
+    public void removeAlyVideo(String keyid, String keysecret, String id) {
+        try {
+            //初始化对象
+            DefaultAcsClient client = InitVodClient.initVodClient(keyid, keysecret);
+            //创建删除视频request对象
+            DeleteVideoRequest request = new DeleteVideoRequest();
+
+            //向request中设置视频id
+
+            request.setVideoIds(id);
+            client.getAcsResponse(request);
+        } catch (ClientException e) {
+            e.printStackTrace();
+            throw  new GuliException(20001,"删除视频失败");
+        }
+    }
+
+    //一次性删除多个视频
+    @Override
+    public void removeMoreAlyVideo(List<String> videoIdList, String keyid, String keysecret) {
+        try {
+            //初始化对象
+            DefaultAcsClient client = InitVodClient.initVodClient(keyid, keysecret);
+            //创建删除视频request对象
+            DeleteVideoRequest request = new DeleteVideoRequest();
+
+            //将list集合转换成字符串并且元素之间使用逗号分隔
+            String join = StringUtils.join(videoIdList.toArray(), ",");
+
+            log.info(join);
+            //向request中设置视频id
+            request.setVideoIds(join);
+            client.getAcsResponse(request);
+        } catch (ClientException e) {
+            e.printStackTrace();
+            throw  new GuliException(20001,"删除视频失败");
         }
     }
 }

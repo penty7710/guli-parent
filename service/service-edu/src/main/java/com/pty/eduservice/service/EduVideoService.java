@@ -3,6 +3,8 @@ package com.pty.eduservice.service;
 import com.pty.eduservice.entity.EduVideo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 课程视频 服务类
@@ -14,4 +16,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface EduVideoService extends IService<EduVideo> {
 
     void removeVideoByCourseId(String courseId);
+
 }
