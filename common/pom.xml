@@ -66,6 +66,11 @@
             <artifactId>common-utils</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <!--jwt-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+        </dependency>
 
     </dependencies>
 
