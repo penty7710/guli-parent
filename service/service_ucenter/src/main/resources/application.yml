@@ -1,5 +1,5 @@
 server:
-  port: 8006
+  port: 8160
 
 spring:
   application:
@@ -13,3 +13,8 @@ spring:
     host: 192.168.217.4
     port: 6379
 
+wx:
+  oppen:
+    app_id: wxed9954c01bb89b47
+    appsecret: a7482517235173ddb4083788de60b90e
+    redirecturl: http://localhost:8160/api/ucenter/wx/callback

@@ -6,6 +6,7 @@ import com.pty.commonutils.R;
 import com.pty.educenter.entity.UcenterMember;
 import com.pty.educenter.service.UcenterMemberService;
 import com.pty.educenter.vo.RegisterVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author pty
  * @since 2022-04-29
  */
+@Slf4j
 @CrossOrigin
 @RestController
 @RequestMapping("/educenter/member")
@@ -29,7 +31,7 @@ public class UcenterMemberController {
     //登录
     @PostMapping("login")
     public R loginUser(@RequestBody UcenterMember member) {
-
+        log.info("hh");
         String token = ucenterMemberService.login(member);
         return R.ok().data("token",token);
 
