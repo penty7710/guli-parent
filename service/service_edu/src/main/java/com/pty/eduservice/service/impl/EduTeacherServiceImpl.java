@@ -10,6 +10,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.pty.eduservice.vo.TeacherQuery;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
  * 讲师 服务实现类
@@ -21,6 +25,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeacher> implements EduTeacherService {
 
+    //讲师分页列表查询（后台）
     @Override
     public void pageQuery(Page<EduTeacher> pageParam, TeacherQuery teacherQuery) {
         QueryWrapper<EduTeacher> queryWrapper = new QueryWrapper<>();
@@ -51,5 +56,45 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
             queryWrapper.le("gmt_create", end);
         }
         baseMapper.selectPage(pageParam, queryWrapper);
+    }
+
+    //讲师分页查询（前台）
+    @Override
+    public Map<String, Object> getTeacherFrontList(Page<EduTeacher> pageParam) {
+        QueryWrapper<EduTeacher> wrapper = new QueryWrapper<>();
+        //根据id降序
+        wrapper.orderByDesc("id");
+
+        //把分页数据封装到pageTeacher对象
+        baseMapper.selectPage(pageParam,wrapper);
+
+        //查询数据列表
+        List<EduTeacher> records = pageParam.getRecords();
+        //当前页
+        long current = pageParam.getCurrent();
+        //总页数
+        long pages = pageParam.getPages();
+        //每页显示的数量
+        long size = pageParam.getSize();
+        //总记录数
+        long total = pageParam.getTotal();
+        //下一页
+        boolean hasNext = pageParam.hasNext();
+        //上一页
+        boolean hasPrevious = pageParam.hasPrevious();
+
+
+        //把分页数据获取出来，放到map集合
+        Map<String, Object> map = new HashMap<>();
+        map.put("items", records);
+        map.put("current", current);
+        map.put("pages", pages);
+        map.put("size", size);
+        map.put("total", total);
+        map.put("hasNext", hasNext);
+        map.put("hasPrevious", hasPrevious);
+
+        return map;
+
     }
 }

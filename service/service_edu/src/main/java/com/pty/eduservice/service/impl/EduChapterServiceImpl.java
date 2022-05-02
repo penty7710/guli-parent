@@ -31,7 +31,7 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
     //注入小节service
     private EduVideoService videoService;
 
-
+    //根据课程id查询所有的章节和小节
     @Override
     public List<ChapterVo> getChapterVideoByCourseId(String courseId) {
         //1 根据课程id查询课程里面所有的章节

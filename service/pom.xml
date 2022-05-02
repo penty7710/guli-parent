@@ -12,7 +12,7 @@
     <artifactId>service</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>service-edu</module>
+        <module>service_edu</module>
         <module>service_oss</module>
         <module>service_vod</module>
         <module>service_cms</module>
