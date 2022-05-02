@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pty.eduservice.mapper.EduCourseMapper">
+    <!--根据课程id，获取发布课程信息-->
+    <select id="getPublishCourseInfo" resultType="com.pty.eduservice.vo.CoursePublishVo">
+        SELECT
+            a.id,
+            a.title,
+            a.price,
+            a.lesson_num lessonNum,
+            a.cover,
+            c.title subjectLevelOne,
+            e.title subjectLevelTwo,
+            d.`name` teacherName
+        FROM
+            edu_course a
+                LEFT JOIN edu_course_description b ON a.id = b.id
+                LEFT JOIN edu_subject c ON a.subject_id = c.id
+                LEFT JOIN edu_subject e ON a.subject_parent_id = e.id
+                LEFT JOIN edu_teacher d ON a.teacher_id = d.id
+        WHERE
+            a.id = #{coursId}
+    </select>
+    <!--根据课程id，查询课程基本信息-->
+    <select id="getBaseCourseInfo" resultType="com.pty.eduservice.vo.CourseWebVo">
+        SELECT
+            a.id,
+            a.title,
+            a.price,
+            a.lesson_num lessonNum,
+            a.buy_count buyCount,
+            a.view_count viewCount,
+            a.cover,
+            b.description,
+            c.title subjectLevelOne,
+            c.id subjectLevelOneId,
+            e.title subjectLevelTwo,
+            e.parent_id subjectLevelTwoId,
+            d.id teacherId,
+            d.`name` teacherName,
+            d.intro,
+            d.avatar
+        FROM
+            edu_course a
+                LEFT JOIN edu_course_description b ON a.id = b.id
+                LEFT JOIN edu_subject c ON a.subject_id = c.id
+                LEFT JOIN edu_subject e ON a.subject_parent_id = e.id
+                LEFT JOIN edu_teacher d ON a.teacher_id = d.id
+        WHERE
+            a.id = #{courseId}
+    </select>
+</mapper>
