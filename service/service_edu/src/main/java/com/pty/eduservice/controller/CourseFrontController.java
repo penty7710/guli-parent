@@ -54,4 +54,11 @@ public class CourseFrontController {
         return R.ok().data("courseWebVo",courseWebVo).data("chapterVideoList",chapterVideoList);
     }
 
+    //根据课程id获取课程信息
+    @PostMapping("getCourseInfoOrder/{id}")
+    public R getCourseInfoOrder(@PathVariable String id){
+        CourseWebVo courseInfo = courseService.getBaseCourseInfo(id);
+        return  R.ok().data("courseInfo",courseInfo);
+    }
+
 }

@@ -12,6 +12,10 @@ spring:
   redis:
     host: 192.168.217.4
     port: 6379
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
 
 wx:
   oppen:
