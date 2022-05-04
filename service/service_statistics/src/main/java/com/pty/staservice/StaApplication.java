@@ -1,24 +1,23 @@
-package com.pty.educenter;
+package com.pty.staservice;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author : pety
- * @date : 2022/4/29 13:44
+ * @date : 2022/5/4 16:58
  */
-//开启定时任务
-@EnableScheduling
+@ComponentScan(basePackages = {"com.pty"})
 @EnableDiscoveryClient
-@ComponentScan("com.pty")
+@EnableFeignClients
 @SpringBootApplication
-@MapperScan("com.pty.educenter.mapper")
-public class UcenterApplication {
+@MapperScan("com/pty/staservice/mapper")
+public class StaApplication {
     public static void main(String[] args) {
-        SpringApplication.run(UcenterApplication.class );
+        SpringApplication.run(StaApplication.class);
     }
 }

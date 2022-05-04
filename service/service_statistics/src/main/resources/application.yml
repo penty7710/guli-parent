@@ -1,0 +1,36 @@
+#服务端口
+server:
+  port: 8008
+
+spring:
+  #环境设置：dev、test、prod
+  profiles:
+    active: dev
+
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/guli?serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+
+
+  #同意返回的json时间格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+    #配置nacos
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  #配置项目名称
+  application:
+    name: service-statistics
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/*.xml
+

@@ -114,10 +114,21 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
         baseMapper.insert(member);
     }
 
+    /**
+     * 判断是否有openid
+     */
     @Override
     public UcenterMember getOpenIdMember(String openid) {
 
         return baseMapper.selectOne(new QueryWrapper<UcenterMember>().eq("openid",openid));
 
+    }
+
+    /**
+     * 查询某一天注册人数
+     */
+    @Override
+    public Integer countRegisterDay(String day) {
+        return baseMapper.countRegisterDay(day);
     }
 }
